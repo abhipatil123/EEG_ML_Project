@@ -95,7 +95,7 @@ class ChbLabelWrapper:
                 seizure_end = int(pattern_seizure_end.search(metadata_block[4 + i * 2 + 1]).group(1))
                 seizure_intervals.append((seizure_start, seizure_end))
             file_metadata['seizure_intervals'] = seizure_intervals
-            output_metadata[filename] = file_metadata
+            output_metadata[filename] = file_metadata #Mapping filename to contents of that file
         else:
             import warnings
             warnings.warn("Block didn't follow the pattern for a metadata file block", Warning)

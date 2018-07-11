@@ -9,8 +9,11 @@ class Patient:
         self._id = id
         self._edf_files = map(
             lambda filename: ChbEdfFile(filename, self._id),
-            glob.glob("physionet.org/pn6/chbmit/chb%02d/*.edf" % self._id)
+            glob.glob("C:\Users\Abhishek\Box Sync\EEG_Project\physionet.org\pn6\chbmit\chb%02d\*.edf" % self._id)
         )
+        
+       
+        
         self._cumulative_duration = [0]
         
         for file in self._edf_files[:-1]:
@@ -18,7 +21,7 @@ class Patient:
         
         self._duration = sum(self._cumulative_duration) #Total duration of recording of chb01 
         
-        self._seizure_list = ChbLabelWrapper("physionet.org/pn6/chbmit/chb%02d/chb%02d-summary.txt" % (self._id, self._id)).get_seizure_list()
+        self._seizure_list = ChbLabelWrapper("C:\Users\Abhishek\Box Sync\EEG_Project\physionet.org\pn6\chbmit\chb%02d\chb%02d-summary.txt" % (self._id, self._id)).get_seizure_list()
         self._seizure_intervals = []
 
         for i, file in enumerate(self._seizure_list):
@@ -50,7 +53,7 @@ class Patient:
         labels = np.zeros(self._duration)
 
         for i, interval in enumerate(self._seizure_intervals):
-                labels[interval[0]:interval[1]] = 1
+                labels[int(interval[0]):int(interval[1])] = 1
 
         return labels
 
@@ -68,8 +71,8 @@ class Patient:
                 right = -1
             else:
                 right = (self._seizure_intervals[i][1] + self._seizure_intervals[i+1][0]) / 2
-            clips.append((data[left:right], labels[left:right]))
+            clips.append((data[int(left):int(right)], labels[int(left):int(right)]))
         
         return clips
-p1 = Patient(1);
+p1 = Patient(1)
 p1.get_seizure_clips()
