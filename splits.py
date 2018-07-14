@@ -14,9 +14,9 @@ def intra_patient_split(patient_id, train_frac=0.8, val_frac=0.1):
     n_val_seizures = max(1, int(round(val_frac * len(seizures))))
     n_test_seizures = max(1, int(round(test_frac * len(seizures))))
     n_train_seizures = len(seizures) - n_val_seizures - n_test_seizures
-    print clips[:n_train_seizures]
-    print clips[n_train_seizures : n_train_seizures + n_val_seizures]
-    print clips[n_train_seizures + n_val_seizures:]
+    print (clips[:n_train_seizures])
+    print (clips[n_train_seizures : n_train_seizures + n_val_seizures])
+    print (clips[n_train_seizures + n_val_seizures:])
     return (
         # Training clips
         clips[:n_train_seizures],

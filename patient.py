@@ -3,14 +3,14 @@ import numpy as np
 
 from chb_edf_file import ChbEdfFile
 from chb_label_wrapper import ChbLabelWrapper
-#Comment
+
 class Patient:
     def __init__(self, id):
         self._id = id
-        self._edf_files = map(
+        self._edf_files = list(map(
             lambda filename: ChbEdfFile(filename, self._id),
-            glob.glob("C:\Users\Abhishek\Box Sync\EEG_Project\physionet.org\pn6\chbmit\chb%02d\*.edf" % self._id)
-        )
+            glob.glob("/home/ideatower/PycharmProjects/EEG_Project/physionet.org/pn6/chbmit/chb%02d/*.edf" % self._id)
+        ))
         
        
         
@@ -21,7 +21,7 @@ class Patient:
         
         self._duration = sum(self._cumulative_duration) #Total duration of recording of chb01 
         
-        self._seizure_list = ChbLabelWrapper("C:\Users\Abhishek\Box Sync\EEG_Project\physionet.org\pn6\chbmit\chb%02d\chb%02d-summary.txt" % (self._id, self._id)).get_seizure_list()
+        self._seizure_list = ChbLabelWrapper("/home/ideatower/PycharmProjects/EEG_Project/physionet.org/pn6/chbmit/chb%02d/chb%02d-summary.txt" % (self._id, self._id)).get_seizure_list()
         self._seizure_intervals = []
 
         for i, file in enumerate(self._seizure_list):
@@ -35,7 +35,7 @@ class Patient:
 
     def get_eeg_data(self):
         for i, file in enumerate(self._edf_files):
-            print "Reading EEG data from file %s" % file._filename
+            print("Reading EEG data from file %s" % file._filename)
             if not i:
                 data = file.get_data()
             else:
@@ -75,4 +75,6 @@ class Patient:
         
         return clips
 p1 = Patient(1)
-p1.get_seizure_clips()
+clips = []
+clips = p1.get_seizure_clips()
+print(clips)

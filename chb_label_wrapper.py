@@ -103,7 +103,7 @@ class ChbLabelWrapper:
             try:
                 self._channel_names = self._parse_channel_names("\n".join(metadata_block))
             except Exception as e:
-                print 'Failed to parse block as a channel names block'
+                print('Failed to parse block as a channel names block')
                 raise e
         return output_metadata
 
@@ -137,7 +137,7 @@ class ChbLabelWrapper:
         """
         Get list of seizure intervals for each file
         """
-        return [metadata['seizure_intervals'] for filename, metadata in self._metadata_store.iteritems()]
+        return [metadata['seizure_intervals'] for filename, metadata in self._metadata_store.items()]
 
     def get_file_metadata(self):
         """
