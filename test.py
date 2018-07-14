@@ -49,9 +49,12 @@ dummy_y = all_y#[y[:2000] for y in all_y]
 
 from braindecode.datautil.signal_target import SignalAndTarget
 from braindecode.datautil.splitters import split_into_two_sets
-whole_set = SignalAndTarget(dummy_X, dummy_y)
+whole_set = SignalAndTarget(dummy_X, dummy_y) #Just an object which includes X and Y
 train_set, test_set = split_into_two_sets(whole_set,0.5)
 train_set, valid_set = split_into_two_sets(train_set, 0.7)
+
+#Modeling of data
+
 
 from braindecode.models.shallow_fbcsp import ShallowFBCSPNet
 from braindecode.models.deep4 import Deep4Net
