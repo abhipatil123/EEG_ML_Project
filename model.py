@@ -1,6 +1,6 @@
 #Modeling of data
 from splits import *
-
+import numpy as np
 from braindecode.models.shallow_fbcsp import ShallowFBCSPNet
 from braindecode.models.deep4 import Deep4Net
 from torch import nn

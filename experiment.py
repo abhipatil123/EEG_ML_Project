@@ -7,6 +7,8 @@ from braindecode.experiments.stopcriteria import MaxEpochs
 import torch.nn.functional as F
 import torch as th
 from braindecode.torch_ext.modules import Expression
+from seizure_monitor import *
+from model import *
 # Iterator is used to iterate over datasets both for training
 # and evaluation
 iterator = CropsFromTrialsIterator(batch_size=32,input_time_length=input_time_length,

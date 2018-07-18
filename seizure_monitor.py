@@ -1,6 +1,6 @@
 from braindecode.experiments.monitors import compute_preds_per_trial_for_set
 from sklearn.metrics import roc_auc_score
-
+import numpy as np
 class SeizureMonitor(object):
     """
     Compute trialwise misclasses from predictions for crops.

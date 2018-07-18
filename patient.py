@@ -7,7 +7,7 @@ import numpy as np
 
 #Get raw data of patient
 subject_id = 1
-base_path = "/home/ideatower/PycharmProjects/EEG_Project/physionet.org/pn6/chbmit/"
+base_path = "/home/ideatower/PycharmProjects/EEG_Project/"
 edf_file_names = sorted(glob.glob(os.path.join(base_path, "chb{:02d}/*.edf".format(subject_id))))
 summary_file = os.path.join(base_path, "chb{:02d}/chb{:02d}-summary.txt".format(subject_id, subject_id))
 summary_content = open(summary_file,'r').read()
@@ -45,3 +45,14 @@ for edf_file_name in edf_file_names:
     X, y = extract_data_and_labels(edf_file_name, summary_content)
     all_X.append(X)
     all_y.append(y)
+
+count_seizures = 0
+count_nonseizures = 0
+# print(all_X)
+for i in range(len(all_y)):
+    count_seizures += (all_y[i] == 1).sum()
+    count_nonseizures += (all_y[i] == 0).sum()
+
+print(count_nonseizures/count_seizures)
+# print("No: of Seizure datapoints: " + count_seizures)
+# print("No: of Non-Seizure datapoints: " + count_nonseizures)
